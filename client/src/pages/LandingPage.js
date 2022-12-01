@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
-import UserPage from '../components/UserPage'
-import Login from '../components/Login';
+import React, { useEffect, useState } from 'react'
 import Auth from "../utils/auth";
 import UserForm from '../components/Form';
+import { Navigate } from 'react-router-dom';
 
 export default function LandingPage() {
-
+    
+    if(Auth.loggedIn()){
+        return <Navigate to={'/user'} />
+    }
 
 
     return (
         <>
-            <div className='front-page m-0'>
+            <div className='front-page m-0 pt-2'>
                 
                 <div className='content-wrap d-flex align-items-center justify-content-between w-75 m-auto'>
                     <div className='wrap-image '>

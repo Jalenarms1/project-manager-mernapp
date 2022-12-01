@@ -1,19 +1,19 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const {User, Thought} = require("../models")
+const {User} = require("../models")
 
 const resolvers = {
     Query: {
         getUsers: async () => {
-            return User.find().populate("thoughts");
+            return User.find().populate("projects");
         },
 
         getAUser: async (id) => {
-            return User.findById(id).populate("thoughts");
+            return User.findById(id).populate("projects");
         },
         me: async (parent, args, context) => {
             if (context.user){
-                return User.findOne({_id: context.user._id}).populate('thoughts')
+                return User.findOne({_id: context.user._id}).populate('projects')
             }
             throw new AuthenticationError('You must login in first')
         }

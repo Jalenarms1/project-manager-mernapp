@@ -5,7 +5,46 @@ export const GET_USERS = gql`
         getUsers{
             _id
             username
-            email
+            
+        }
+    }
+`
+
+export const GET_ME = gql`
+ query me{
+    me{
+        _id
+        username
+        projects{
+            host{
+                _id
+                username
+            }
+            participants{
+                _id
+                username
+            }
+            name
+            description
+            budget
+            images
+            milestones{
+                title 
+                description
+                completed
+            }
+            completed
+        }
+    }
+ }
+`
+
+export const GET_A_USER = gql`
+    query getAUser($_id: ID!){
+        getAUser(_id: $_id){
+            _id
+            username
+            
         }
     }
 `

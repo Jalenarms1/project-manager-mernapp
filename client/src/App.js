@@ -6,14 +6,17 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import "./App.css";
 import Auth from "./utils/auth";
 import { Nav } from 'react-bootstrap';
 import { UserProvider } from './context/userContext';
-import UserPage from './components/UserPage';
+import UserPage from './pages/UserPage';
 import Navbar from './components/Navbar';
+import LoginPage from './pages/LoginPage';
+
+
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -39,16 +42,20 @@ const client = new ApolloClient({
 });
 
 function App() {
+  document.body.style.backgroundImage = "linear-gradient(29deg, rgba(2,6,15,1) 0%, rgba(23,54,121,1) 74%)";
+
   return (
     <ApolloProvider client={client}>
       <UserProvider>
-        {<Nav className=' w-100'>
-          <Navbar />
-        </Nav>}
+        
         <Router>
+          <Nav className=' w-100'>
+            <Navbar />
+          </Nav>
           <Routes>
             <Route path='/' element={<LandingPage />} />
             <Route path='/user' element={<UserPage />} />
+            <Route path='/login' element={<LoginPage />} />
           </Routes>
           
         </Router>
